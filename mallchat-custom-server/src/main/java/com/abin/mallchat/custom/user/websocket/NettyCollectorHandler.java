@@ -18,7 +18,9 @@ public class NettyCollectorHandler extends ChannelInboundHandlerAdapter {
         String tid = UUID.randomUUID().toString();
         MDC.put(MDCKey.TID, tid);
         RequestInfo info = new RequestInfo();
+        // 用户上线时添加
         info.setUid(NettyUtil.getAttr(ctx.channel(), NettyUtil.UID));
+        // http请求 升级websocket请求前添加
         info.setIp(NettyUtil.getAttr(ctx.channel(), NettyUtil.IP));
         RequestHolder.set(info);
 

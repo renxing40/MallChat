@@ -118,7 +118,9 @@ public class WebSocketServiceImpl implements WebSocketService {
      */
     private Integer generateLoginCode(Channel channel) {
         do {
+            // 生成登录码
             CODE.getAndIncrement();
+            // 判断登陆码是否被占用 被占用则重新生成
         } while (WAIT_LOGIN_MAP.asMap().containsKey(CODE.get())
                 || Objects.isNull(WAIT_LOGIN_MAP.get(CODE.get(), c -> channel)));
         return CODE.get();
